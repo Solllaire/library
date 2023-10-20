@@ -10,12 +10,11 @@ public class MainMenu {
     private JButton deleteButton;
     private JList NameList;
     private JList CheckList;
-
+    JFrame frame = new JFrame();
     public MainMenu() {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame();
                 frame.setContentPane(new AddWindow().AddWin);
                 frame.setSize(400,200);
                 frame.setResizable(false);

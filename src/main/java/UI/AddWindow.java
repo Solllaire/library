@@ -3,6 +3,7 @@ package UI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class AddWindow {
 
@@ -10,10 +11,11 @@ public class AddWindow {
     private JTextField NameBook;
     private JButton addButton;
     private JCheckBox readCheckBox;
-    private JTextField textField1;
+    private JTextField pathTextField;
     private JButton browseButton;
-
+    JFrame frame = new JFrame();
     public AddWindow() {
+
         readCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -24,6 +26,18 @@ public class AddWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int response=fileChooser.showOpenDialog(null);
+                if(response == JFileChooser.APPROVE_OPTION){
+                    File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+
+                    pathTextField.setText(file.getAbsolutePath());
+                }
             }
         });
     }
