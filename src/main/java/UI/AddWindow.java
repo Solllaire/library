@@ -13,6 +13,9 @@ public class AddWindow {
     private JCheckBox readCheckBox;
     private JTextField pathTextField;
     private JButton browseButton;
+
+    MainMenu mainMenu = new MainMenu();
+
     JFrame frame = new JFrame();
     public AddWindow() {
 
@@ -25,6 +28,10 @@ public class AddWindow {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String bookName = NameBook.getText();
+                if (readCheckBox.isSelected()){
+
+                }
 
             }
         });

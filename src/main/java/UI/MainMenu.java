@@ -8,7 +8,7 @@ public class MainMenu {
     private JPanel Field;
     private JButton addButton;
     private JButton deleteButton;
-    private JList NameList;
+    public JList NameList;
     private JList CheckList;
     JFrame frame = new JFrame();
     public MainMenu() {
