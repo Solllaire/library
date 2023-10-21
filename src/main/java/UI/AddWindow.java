@@ -1,38 +1,31 @@
 package UI;
-
-import org.w3c.dom.NameList;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 public class AddWindow extends MainMenu{
-
     JPanel AddWin;
     private JTextField NameBook;
-    private JButton addButton;
+    private JButton addBookButton;
     private JCheckBox readCheckBox;
     private JTextField pathTextField;
     private JButton browseButton;
 
-
-
     DefaultListModel<String> listModelCheck;
     DefaultListModel<String> listModelName;
 
+    public AddWindow(DefaultListModel<String> listModelName, DefaultListModel<String> listModelCheck) {
+        this.listModelName = listModelName;
+        this.listModelCheck = listModelCheck;
 
-    public AddWindow() {
-        listModelCheck = new DefaultListModel<>();
-        listModelName = new DefaultListModel<>();
-        addButton.addActionListener(new ActionListener() {
+        addBookButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String bookName = NameBook.getText();
                 String read = "Read";
                 String unread = "Unread";
                 if (readCheckBox.isSelected()){
-
                     listModelCheck.addElement(read);
                     CheckList.setModel(listModelCheck);
                 }else {
@@ -43,6 +36,7 @@ public class AddWindow extends MainMenu{
                 NameList.setModel(listModelName);
             }
         });
+
         browseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

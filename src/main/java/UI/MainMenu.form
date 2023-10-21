@@ -40,7 +40,9 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <model/>
+        </properties>
       </component>
       <component id="ea880" class="javax.swing.JList" binding="CheckList">
         <constraints>
@@ -48,7 +50,9 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <model/>
+        </properties>
       </component>
     </children>
   </grid>
