@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainMenu {
+public class MainMenu{
     private JPanel Field;
     private JButton addButton;
     private JButton deleteButton;
     public JList NameList;
-    private JList CheckList;
+    public JList CheckList;
     JFrame frame = new JFrame();
     public MainMenu() {
         addButton.addActionListener(new ActionListener() {
