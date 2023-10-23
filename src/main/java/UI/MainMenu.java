@@ -36,5 +36,6 @@ public class MainMenu{
         frame.setSize(600,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
     }
 }
