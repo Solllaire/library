@@ -1,7 +1,13 @@
 package UI;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class MainMenu{
     private JPanel Field;
@@ -24,7 +30,6 @@ public class MainMenu{
             }
         });
     }
-
     public MainMenu() { //НЕ УДАЛЯТЬ, ЭТО МАГИЯ, НО ОНО РАБОТАЕТ !!!!!
     }
 
@@ -36,6 +41,12 @@ public class MainMenu{
         frame.setSize(600,300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("TitleList.txt"));
+        }
 
     }
 }
