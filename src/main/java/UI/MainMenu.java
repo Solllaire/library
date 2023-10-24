@@ -47,6 +47,7 @@ public class MainMenu{
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               NameList.remove(NameList.getSelectedIndex());
 
             }
         });
@@ -57,16 +58,13 @@ public class MainMenu{
         {
             BufferedReader bf = new BufferedReader(reader);
             String line = bf.readLine();
-            int heh = 0;
             while (line!=null){
                 listModelName.addElement(line);
                 line = bf.readLine();
-                heh++;
             }
         }
         catch(IOException ex){
-
-            System.out.println("COCK");
+            System.out.println("Nope");
             return listModelName;
         }
         return listModelName;
