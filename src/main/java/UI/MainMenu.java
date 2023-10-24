@@ -6,8 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class MainMenu{
     private JPanel Field;
@@ -17,7 +16,23 @@ public class MainMenu{
     public JList CheckList;
     JFrame frame = new JFrame();
 
+    public MainMenu() { //НЕ УДАЛЯТЬ, ЭТО МАГИЯ, НО ОНО РАБОТАЕТ !!!!!
+    }
+
+    public static void main(String[] args) {
+        DefaultListModel<String> listModelName = filer("TitleList.txt");
+        DefaultListModel<String> listModeCheck = filer("ReadList.txt");
+        JFrame frame = new JFrame();
+        frame.setContentPane(new MainMenu(listModelName, listModeCheck).Field);
+        frame.setSize(600,300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+    }
     public MainMenu(DefaultListModel<String> listModelName, DefaultListModel<String> listModelCheck) {
+            frame.setContentPane(new AddWindow(listModelName, listModelCheck).AddWin);
+            NameList.setModel(listModelName);
+            CheckList.setModel(listModelCheck);
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,24 +44,31 @@ public class MainMenu{
                 CheckList.setModel(listModelCheck);
             }
         });
-    }
-    public MainMenu() { //НЕ УДАЛЯТЬ, ЭТО МАГИЯ, НО ОНО РАБОТАЕТ !!!!!
-    }
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-    public static void main(String[] args) {
+            }
+        });
+    }
+    static public DefaultListModel<String> filer(String file){
         DefaultListModel<String> listModelName = new DefaultListModel<>();
-        DefaultListModel<String> listModeCheck = new DefaultListModel<>();
-        JFrame frame = new JFrame();
-        frame.setContentPane(new MainMenu(listModelName, listModeCheck).Field);
-        frame.setSize(600,300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader("TitleList.txt"));
+        try(FileReader reader = new FileReader(file))
+        {
+            BufferedReader bf = new BufferedReader(reader);
+            String line = bf.readLine();
+            int heh = 0;
+            while (line!=null){
+                listModelName.addElement(line);
+                line = bf.readLine();
+                heh++;
+            }
         }
+        catch(IOException ex){
 
+            System.out.println("COCK");
+            return listModelName;
+        }
+        return listModelName;
     }
 }
