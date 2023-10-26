@@ -1,12 +1,13 @@
 package UI;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static UI.AddWindow.*;
 
 public class MainMenu{
     private JPanel Field;
@@ -14,6 +15,7 @@ public class MainMenu{
     private JButton deleteButton;
     public JList NameList;
     public JList CheckList;
+    private JButton Read;
     JFrame frame = new JFrame();
 
     public MainMenu() { //НЕ УДАЛЯТЬ, ЭТО МАГИЯ, НО ОНО РАБОТАЕТ !!!!!
@@ -53,6 +55,10 @@ public class MainMenu{
                     listModelCheck.remove(kek);
                     NameList.setModel(listModelName);
                     CheckList.setModel(listModelCheck);
+                    deleter(kek, pathlist);
+                    deleter(kek, titleList);
+                    deleter(kek, readList);
+
                 }
                 else if(!(CheckList.isSelectionEmpty())) {
                     int kek = CheckList.getSelectedIndex();
@@ -64,6 +70,27 @@ public class MainMenu{
                 else {
                     System.out.println("kek");
                     return;
+                }
+            }
+        });
+        Read.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int id = NameList.getSelectedIndex();
+                String path;
+                try {
+                    path = Files.readAllLines(Paths.get(pathlist)).get(id);
+                    File file = new File(path);
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()) {
+                        try {
+                            desktop.open(file);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
@@ -84,5 +111,32 @@ public class MainMenu{
             return listModelName;
         }
         return listModelName;
+    }
+    public void deleter(int index, String file){
+        File inputFile = new File(file);
+        File tempFile = new File("myTempFile.txt");
+
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+            String currentLine;
+            int incr = 0;
+            while((currentLine = br.readLine()) != null) {
+                String trimmedLine = currentLine.trim();
+                if(incr == index) {incr++; continue;}
+                bw.write(currentLine + System.getProperty("line.separator"));
+                incr++;
+            }
+            bw.close();
+            br.close();
+            inputFile.delete();
+            tempFile.renameTo(inputFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

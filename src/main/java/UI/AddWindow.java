@@ -16,12 +16,15 @@ public class AddWindow extends MainMenu{
     private JButton browseButton;
     private JButton readButton;
 
+    public final static String pathlist = "pathlist.txt", titleList = "TitleList.txt", readList = "ReadList.txt";
+
     DefaultListModel<String> listModelCheck;
     DefaultListModel<String> listModelName;
 
     public AddWindow(DefaultListModel<String> listModelName, DefaultListModel<String> listModelCheck) {
         this.listModelName = listModelName;
         this.listModelCheck = listModelCheck;
+        String bookname;
 
         addBookButton.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +53,7 @@ public class AddWindow extends MainMenu{
 
 
                     try {
-                        File file = new File("TitleList.txt");
+                        File file = new File(titleList);
                         if (!file.exists()) {
                             file.createNewFile();
                         }
@@ -62,7 +65,7 @@ public class AddWindow extends MainMenu{
                     }
 
                     try {
-                        File file = new File("ReadList.txt");
+                        File file = new File(readList);
                         if (!file.exists()) {
                             file.createNewFile();
                         }
@@ -73,7 +76,7 @@ public class AddWindow extends MainMenu{
                         System.out.println(ex);
                     }
                         try {
-                            File file = new File("pathlist.txt");
+                            File file = new File(pathlist);
                             if (!file.exists()) {
                                 file.createNewFile();
                             }
