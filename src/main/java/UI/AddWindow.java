@@ -27,9 +27,12 @@ public class AddWindow extends MainMenu{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String bookName = NameBook.getText();
+                String path = pathTextField.getText();
                 if (bookName.equals("") || bookName.equalsIgnoreCase("enter book name")) {
                     NameBook.setText("enter book name");
-                } else {
+                } else if (path.equals("") || bookName.equalsIgnoreCase("choose a path")) {
+                    pathTextField.setText("choose a path");
+                } else  {
                     String read = "Read";
                     String unread = "Not Read";
                     String ru;
@@ -48,11 +51,11 @@ public class AddWindow extends MainMenu{
 
                     try {
                         File file = new File("TitleList.txt");
-                        if(!file.exists()){
+                        if (!file.exists()) {
                             file.createNewFile();
                         }
-                        FileWriter writer = new FileWriter(file,true);
-                        writer.write(bookName+"\n");
+                        FileWriter writer = new FileWriter(file, true);
+                        writer.write(bookName + "\n");
                         writer.close();
                     } catch (Exception ex) {
                         System.out.println(ex);
@@ -60,15 +63,26 @@ public class AddWindow extends MainMenu{
 
                     try {
                         File file = new File("ReadList.txt");
-                        if(!file.exists()){
+                        if (!file.exists()) {
                             file.createNewFile();
                         }
                         FileWriter writer = new FileWriter(file, true);
-                        writer.write(ru+"\n");
+                        writer.write(ru + "\n");
                         writer.close();
                     } catch (Exception ex) {
                         System.out.println(ex);
                     }
+                        try {
+                            File file = new File("pathlist.txt");
+                            if (!file.exists()) {
+                                file.createNewFile();
+                            }
+                            FileWriter writer = new FileWriter(file, true);
+                            writer.write(path + "\n");
+                            writer.close();
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
                 }
             }
         });
