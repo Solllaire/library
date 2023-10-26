@@ -1,10 +1,11 @@
 package UI;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.IOException;
 
 public class AddWindow extends MainMenu{
     JPanel AddWin;
@@ -13,6 +14,7 @@ public class AddWindow extends MainMenu{
     private JCheckBox readCheckBox;
     private JTextField pathTextField;
     private JButton browseButton;
+    private JButton readButton;
 
     DefaultListModel<String> listModelCheck;
     DefaultListModel<String> listModelName;
@@ -29,7 +31,7 @@ public class AddWindow extends MainMenu{
                     NameBook.setText("enter book name");
                 } else {
                     String read = "Read";
-                    String unread = "Unread";
+                    String unread = "Not Read";
                     String ru;
                     if (readCheckBox.isSelected()) {
                         listModelCheck.addElement(read);
@@ -80,6 +82,22 @@ public class AddWindow extends MainMenu{
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     pathTextField.setText(file.getAbsolutePath());
                 }
+            }
+        });
+        readButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path = pathTextField.getText();
+                    File file = new File(path);
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()) {
+                        try {
+                            desktop.open(file);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
             }
         });
     }

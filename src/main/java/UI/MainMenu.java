@@ -47,8 +47,24 @@ public class MainMenu{
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               NameList.remove(NameList.getSelectedIndex());
-
+                if(!(NameList.isSelectionEmpty())) {
+                    int kek = NameList.getSelectedIndex();
+                    listModelName.remove(kek);
+                    listModelCheck.remove(kek);
+                    NameList.setModel(listModelName);
+                    CheckList.setModel(listModelCheck);
+                }
+                else if(!(CheckList.isSelectionEmpty())) {
+                    int kek = CheckList.getSelectedIndex();
+                    listModelName.remove(kek);
+                    listModelCheck.remove(kek);
+                    NameList.setModel(listModelName);
+                    CheckList.setModel(listModelCheck);
+                }
+                else {
+                    System.out.println("kek");
+                    return;
+                }
             }
         });
     }
